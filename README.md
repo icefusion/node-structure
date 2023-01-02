@@ -11,7 +11,7 @@ I am studing DDD, than this can help to apply some knowledge.
 
 
 
-## Apêndice
+## Application Structure
 
 Just to you know how this aplication it's organized, I will try to explain a little.
 
@@ -66,7 +66,7 @@ To run application:
 ```bash
   npm run start:local
 ```
-## Documentação da API
+## API Documentation
 
 #### Return a specific user
 
@@ -104,7 +104,7 @@ To run application:
 ```http
   GET /user/list/chidrens
 ```
-## Autores
+## Autor
 
 - Github - [@icefusion](https://github.com/icefusion)
 - Website - [https://williansfranco.dev](https://williansfranco.dev)
