@@ -104,7 +104,7 @@ To run application:
 ```http
   GET /user/list/chidrens
 ```
-## Autor
+## Author
 
 - Github - [@icefusion](https://github.com/icefusion)
 - Website - [https://williansfranco.dev](https://williansfranco.dev)
