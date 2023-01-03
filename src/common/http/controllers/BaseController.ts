@@ -10,7 +10,7 @@ const methods = {
 } as const
 
 type ValueOf<T> = T[keyof T];
-type valitMethodsCapital = keyof typeof methods;
+type validMethodsCapital = keyof typeof methods;
 type validMethods = ValueOf<typeof methods>;
 
 export abstract class BaseController {
@@ -33,11 +33,11 @@ export abstract class BaseController {
 
       const [, method, path] = match
 
-      if (!methods[method as valitMethodsCapital]) {
+      if (!methods[method as validMethodsCapital]) {
         throw new Error('Invalid method props: ' + method);
       }
 
-      const methodFn = methods[method as valitMethodsCapital] as validMethods;
+      const methodFn = methods[method as validMethodsCapital] as validMethods;
 
       router[methodFn](path, async (req: Request, res: Response, next: NextFunction) => {
         try {
