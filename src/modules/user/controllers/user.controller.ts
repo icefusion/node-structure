@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { userService } from "../services/user.service";
 
 class UserController extends BaseController {
-  public _getRoutes(): Record<string, Function> {
+  public _getRoutes() {
     return {
       "GET:/": this.list,
       "GET:/view/:id": this.view,
@@ -12,8 +12,8 @@ class UserController extends BaseController {
     }
   }
 
-  public async view(request: Request, response: Response) {
-    const { id } = request.params;
+  public async view(req: Request, res: Response) {
+    const { id } = req.params;
     return userService.view(Number(id));
   }
 
