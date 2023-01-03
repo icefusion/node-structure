@@ -24,11 +24,11 @@ class UserRepository {
     },
   ];
 
-  public getData(): IUser[] {
+  public getData() {
     return this.data;
   }
 
-  public getChildrens(): IUser[] {
+  public getChildrens() {
     const childrens = this.data.filter((item) => {
       return item.age < 18;
     });
@@ -36,7 +36,7 @@ class UserRepository {
     return childrens;
   }
 
-  public getAdults(): IUser[] {
+  public getAdults() {
     const adult = this.data.filter((item) => {
       return item.age > 18;
     });
@@ -44,13 +44,11 @@ class UserRepository {
     return adult;
   }
 
-  public getUser(id: number): IUser | undefined {
-    const adult = this.data.find((item) => {
-      return item.id === id;
-    });
+  public getUser(id: number) {
+    const adult = this.data.find((item) => item.id === id);
 
     return adult;
   }
 }
 
-export { UserRepository };
+export const userRepository = new UserRepository();
