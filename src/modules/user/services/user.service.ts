@@ -1,68 +1,47 @@
+import AppError from "@common/http/errors/app.errors";
 import { Response } from "express";
-import { UserRepository } from "../repositories/user.repository";
+import { userRepository } from "../repositories/user.repository";
 
 class UserService {
-  private userRepository: UserRepository;
+  public async view(userId: number) {
+    const user = await userRepository.getUser(userId);
 
-  constructor() {
-    this.userRepository = new UserRepository();
+    if (!user) {
+      throw new AppError("Problems to find user", 400);
+    }
+
+    return user;
   }
 
-  public async view(userId: number, response: Response): Promise<Response> {
-    try {
-      const user = await this.userRepository.getUser(userId);
+  public async list() {
+    const users = await userRepository.getData();
 
-      if (!user) {
-        return response.status(400).send({ error: "Problems to find user" });
-      }
-
-      return response.status(200).send({ status: true, data: user });
-    } catch (err: any) {
-      return response.status(400).send({ error: err.messages });
+    if (!users) {
+      throw new AppError("Problems to list user", 400);
     }
+
+    return users;
   }
 
-  public async list(response: Response): Promise<Response> {
-    try {
-      const users = await this.userRepository.getData();
+  public async listAdults() {
+    const user = await userRepository.getAdults();
 
-      if (!users) {
-        return response.status(400).send({ error: "Problems to list user" });
-      }
-
-      return response.status(200).send({ status: true, data: users });
-    } catch (err: any) {
-      return response.status(400).send({ error: err.messages });
+    if (!user) {
+      throw new AppError("Problems to list adult users", 400);
     }
+
+    return user;
   }
 
-  public async listAdults(response: Response): Promise<Response> {
-    try {
-      const user = await this.userRepository.getAdults();
+  public async listChildrens() {
+    const user = await userRepository.getChildrens();
 
-      if (!user) {
-        return response.status(400).send({ error: "Problems to list adult users" });
-      }
-
-      return response.status(200).send({ status: true, data: user });
-    } catch (err: any) {
-      return response.status(400).send({ error: err.messages });
+    if (!user) {
+      throw new AppError("Problems to list children users", 400);
     }
-  }
 
-  public async listChildrens(response: Response): Promise<Response> {
-    try {
-      const user = await this.userRepository.getChildrens();
-
-      if (!user) {
-        return response.status(400).send({ error: "Problems to list children users" });
-      }
-
-      return response.status(200).send({ status: true, data: user });
-    } catch (err: any) {
-      return response.status(400).send({ error: err.messages });
-    }
+    return user;
   }
 }
 
-export { UserService };
+export const userService = new UserService();

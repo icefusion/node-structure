@@ -1,30 +1,33 @@
+import { BaseController } from "@common/http/controllers/BaseController";
 import { Request, Response } from "express";
-import { UserService } from "../services/user.service";
+import { userService } from "../services/user.service";
 
-class UserController {
-  private userService: UserService;
-
-  constructor() {
-    this.userService = new UserService();
+class UserController extends BaseController {
+  public _getRoutes(): Record<string, Function> {
+    return {
+      "GET:/": this.list,
+      "GET:/view/:id": this.view,
+      "GET:/list/adults": this.listAdults,
+      "GET:/list/childrens": this.listChildrens
+    }
   }
 
   public async view(request: Request, response: Response) {
     const { id } = request.params;
-
-    return this.userService.view(Number(id), response);
+    return userService.view(Number(id));
   }
 
-  public async list(request: Request, response: Response) {
-    return this.userService.list(response);
+  public async list() {
+    return userService.list();
   }
 
-  public async listAdults(request: Request, response: Response) {
-    return this.userService.listAdults(response);
+  public async listAdults() {
+    return userService.listAdults();
   }
 
-  public async listChildrens(request: Request, response: Response) {
-    return this.userService.listChildrens(response);
+  public async listChildrens() {
+    return userService.listChildrens();
   }
 }
 
-export { UserController };
+export const userController = new UserController();
