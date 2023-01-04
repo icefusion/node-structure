@@ -1,5 +1,6 @@
 import { BaseController } from "@common/http/controllers/BaseController";
 import { Request, Response } from "express";
+
 import { userService } from "../services/user.service";
 
 class UserController extends BaseController {
@@ -8,8 +9,8 @@ class UserController extends BaseController {
       "GET:/": this.list,
       "GET:/view/:id": this.view,
       "GET:/list/adults": this.listAdults,
-      "GET:/list/childrens": this.listChildrens
-    }
+      "GET:/list/childrens": this.listChildrens,
+    };
   }
 
   public async view(req: Request, res: Response) {
